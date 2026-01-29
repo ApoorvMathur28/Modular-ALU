@@ -1,0 +1,73 @@
+-------------------------------
+4-bit ALU DESIGN - FEATURES LIST
+-------------------------------
+
+Project Title : 4-bit ALU using Verilog HDL
+Description   : This ALU performs 8 different arithmetic and logical operations based on a 3-bit opcode input. 
+Each module is designed and verified separately, then integrated into a single top-level ALU architecture.
+
+---------------------------------
+INSTRUCTION SET AND DESCRIPTIONS
+---------------------------------
+
+Opcode 000 : ADDITION
+  - Performs 4-bit binary addition of inputs A and B.
+  - Generates a carry-out signal when overflow occurs.
+  - Output: 4-bit SUM and carry_out bit.
+  - Expression: SUM = A + B
+
+Opcode 001 : SUBTRACTION
+  - Performs 4-bit binary subtraction (A - B).
+  - Generates a borrow-out signal if B > A.
+  - Output: 4-bit difference and borrow_out bit.
+  - Expression: DIFF = A - B
+
+Opcode 010 : MULTIPLICATION
+  - Computes the 4x4 bit multiplication of inputs A and B.
+  - Produces an 8-bit result (PROD).
+  - Expression: PROD = A * B
+
+Opcode 011 : DIVISION
+  - Performs integer division of A by B.
+  - Produces two 4-bit outputs: QUOTIENT and REMAINDER.
+  - Includes division-by-zero protection.
+  - Expression: QUOT = A / B; REM = A % B
+
+Opcode 100 : LOGICAL OPERATIONS (logic_op module)
+  - Executes one of seven bitwise logic functions based on a 3-bit logic select line (logic_sel).
+  - 000 = AND, 001 = OR, 010 = XOR, 011 = XNOR,
+    100 = NAND, 101 = NOR, 110 = NOT(A)
+  - Expression: OUT = f(A, B) depending on logic_sel.
+
+Opcode 101 : GRAY CODE CONVERTER
+  - Converts 4-bit binary input A into its corresponding Gray code.
+  - Useful in communication and encoder circuits to reduce bit transition errors.
+  - Expression: G = A ^ (A >> 1)
+
+Opcode 110 : PARITY GENERATOR
+  - Generates even parity bit for the 4-bit input A.
+  - Ensures total number of 1s (including parity) is even.
+  - Expression: even_parity = ~(^A)
+
+Opcode 111 : COMPARATOR
+  - Compares the two 4-bit inputs A and B.
+  - Produces a 3-bit comparison result:
+      CMP[2] = 1 if A < B
+      CMP[1] = 1 if A > B
+      CMP[0] = 1 if A == B
+  - Commonly used in control logic, sorting, and decision circuits.
+
+-------------------------------
+ADDITIONAL FEATURES AND DETAILS
+-------------------------------
+- 3-bit OPCODE controls main ALU operation selection.
+- 3-bit LOGIC_SEL signal used to select among multiple logical operations.
+- Modular design structure with separate Verilog files for each function.
+- Fully combinational ALU design using dataflow modeling.
+- Includes safe handling of division by zero.
+- Designed and verified using testbenches with waveform analysis.
+- Synthesizable and ready for FPGA implementation.
+
+-------------------------------
+END OF FILE
+-------------------------------
